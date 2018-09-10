@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.edge.mapper.OrderMapper">
+    <!--查询用户订单-->
+    <select id="selectOrdersByUserId" parameterType="java.lang.Integer" resultType="team.edge.bean.Order">
+        SELECT *
+        FROM tb_order
+        WHERE tb_order.user_id = #{user_id};
+    </select>
+
+    <!--查询最近订单-可以分页-->
+    <select id="selectNewOrders" resultType="team.edge.bean.Order" parameterType="java.lang.Integer">
+        SELECT *
+        FROM tb_order
+        WHERE tb_order.user_id = #{id}
+        ORDER BY tb_order.create_time
+        LIMIT #{no};
+    </select>
+
+    <!--根据订单ID 查询订单详情-->
+    <select id="selectOrderDetailById" resultType="team.edge.bean.OrderDetail" parameterType="java.lang.Integer">
+        SELECT tb_address.address,tb_address.phone,tb_order.product_id,tb_order.user_id,tb_order.`status`,tb_order.id,
+                tb_order.create_time,tb_user.`name` AS user_name,tb_product.`name` AS product_name,tb_product.new_price,tb_product.`describe`
+        FROM
+                tb_address ,tb_order ,tb_user ,tb_product
+        WHERE
+                tb_order.user_id = tb_user.id AND tb_order.product_id = tb_product.id AND
+                tb_order.user_id = tb_address.user_id AND tb_order.id = #{id};
+    </select>
+
+    <!--新增订单-->
+    <insert id="insertOrder" parameterType="team.edge.bean.Order">
+        INSERT INTO tb_order(tb_order.id,tb_order.user_id,tb_order.product_id,tb_order.`status`,tb_order.create_time) VALUES(#{id}, #{userId}, #{productId}, #{status}, #{createTime});
+    </insert>
+
+    <!--根据ID删除订单-->
+    <delete id="delOrder" parameterType="java.lang.Integer">
+        DELETE FROM tb_order WHERE tb_order.id = #{id};
+    </delete>
+</mapper>

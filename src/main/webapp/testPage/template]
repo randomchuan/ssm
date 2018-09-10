@@ -1,0 +1,13 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+<%--引入公共头--%>
+<jsp:include page="head.jsp"/>
+
+<%--引入公共尾--%>
+<iframe src="foot.html" width="100%" scrolling="no"></iframe>
+
+${pageContext.request.contextPath}

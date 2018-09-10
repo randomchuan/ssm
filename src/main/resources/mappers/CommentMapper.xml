@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.edge.mapper.CommentMapper">
+    <!--根据ID查询商品的用户评论-->
+    <!--要分页-->
+    <select id="selectCommentById" parameterType="java.lang.Integer" resultType="team.edge.bean.Comment">
+        SELECT * FROM tb_comment WHERE tb_comment.product_id = #{product_id} LIMIT #{size};
+    </select>
+
+    <!--添加用户评论-->
+    <insert id="insertComment" parameterType="team.edge.bean.Comment">
+        INSERT INTO tb_comment(tb_comment.id,tb_comment.user_id,tb_comment.product_id,tb_comment.`comment`,tb_comment.create_time)
+        VALUES(#{id}, #{userId}, #{productId}, #{comment}, #{createTime});
+    </insert>
+</mapper>

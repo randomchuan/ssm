@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are by default assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
+        <!--<configuration scan="true" scanPeriod="60 seconds" debug="false">-->
+        <!--&lt;!&ndash; console &ndash;&gt;-->
+        <!--<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
+        <!--&lt;!&ndash; encoder 默认配置为PatternLayoutEncoder &ndash;&gt;-->
+        <!--<encoder>-->
+        <!--<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{0} - %msg%n-->
+        <!--</pattern>-->
+        <!--<charset>gbk</charset>&lt;!&ndash;改成utf-8时在控制台的日志会乱码&ndash;&gt;-->
+        <!--</encoder>-->
+        <!--</appender>-->
+        <!--<appender name="rollingAppender"-->
+        <!--class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<file>E://logtest/test.log</file>-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+        <!--<fileNamePattern>/test-%d{yyyy-MM-dd}.log-->
+        <!--</fileNamePattern>-->
+        <!--<maxHistory>30</maxHistory>-->
+        <!--</rollingPolicy>-->
+        <!--<encoder>&lt;!&ndash; 必须指定，否则不会往文件输出内容 &ndash;&gt;-->
+        <!--<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n-->
+        <!--</pattern>-->
+        <!--</encoder>-->
+        <!--<append>false</append>-->
+        <!--<prudent>false</prudent>-->
+        <!--</appender>-->
+
+        <!--<root level="INFO">-->
+        <!--<appender-ref ref="STDOUT"/>-->
+        <!--<appender-ref ref="rollingAppender"/>-->
+        <!--</root>-->
+        <!--</configuration>-->

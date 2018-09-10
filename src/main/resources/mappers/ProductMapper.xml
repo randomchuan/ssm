@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.edge.mapper.ProductMapper">
+    <!-- 查询最新上架的6种商品-->
+    <select id="selectNewItems" resultType="team.edge.bean.Product">
+        SELECT * FROM tb_product ORDER BY tb_product.create_time LIMIT 4;
+    </select>
+
+    <!-- 查询最新上架的6种商品-->
+    <select id="selectMostItems" resultType="team.edge.bean.Product">
+        SELECT * FROM tb_product ORDER BY tb_product.create_time LIMIT 6;
+    </select>
+
+    <!--根据ID查询详细信息-->
+    <select id="selectDetailById" parameterType="java.lang.Integer" resultType="team.edge.bean.Detail">
+        SELECT tb_detail.*, tb_product.name AS product_name FROM tb_detail, tb_product WHERE tb_detail.product_id = tb_product.id AND tb_detail.product_id = #{product_id};
+    </select>
+
+</mapper>
