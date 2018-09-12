@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page isELIgnored="false" %>
+<%--<%@ page errorPage="error.jsp" %>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -18,6 +19,7 @@
     </script>
 </head>
 <body>
+<%--提示信息 不重要--%>
 <c:if test="${result}">
     <script>
         layer.msg("<spring:message code="comment.comment.success"/>");
@@ -31,10 +33,8 @@
 <%--这里显示评论 由其他页面引入--%>
 <div class="comments">
     <div class="add">
-        <form action="${pageContext.request.contextPath}/commentAdd" name="comment" method="post">
-            <input type="hidden" name="_method" value="PUT">
-            <input type="hidden" name="productId" value="${comments.get(1).productId}">
-            <input type="hidden" name="userId" value="${comments.get(1).userId}">
+        <form action="${pageContext.request.contextPath}/comment/add" name="comment" method="post">
+            <input type="hidden" name="productId" value="${product_id}">
             <textarea id="comment" placeholder="<spring:message code="order.comments.add.tip"/> " cols="20"
                       rows="5"></textarea>
             <input type="submit" value="<spring:message code="order.comments.add" />"/>
@@ -64,15 +64,34 @@
             <c:forEach items="${comments}" var="comment">
                 <div class="comment">
                     <ul>
-                        <li>${comment.id}</li>
-                        <li>${comment.userId}</li>
+                        <li>${comment.comment.id}</li>
+                        <li>${comment.comment.userId}</li>
                         <li>${comment.comment}</li>
-                        <li>${comment.createTime}</li>
+                        <li>${comment.comment.createTime}</li>
                     </ul>
                 </div>
             </c:forEach>
         </c:if>
     </div>
 </div>
+
+
+<%--无输入不提交--%>
+<script>
+    $(function () {
+        //    设置不可选取
+        $('submit').prop("disabled", true);
+        //    对文本框添加改变事件
+        $('textarea').change(function () {
+            var length = $(this).text.length;
+            if (length > 0) {
+                $('submit').prop("disabled", false);
+            }
+            if (length <= 0) {
+                $('submit').prop("disabled", true);
+            }
+        })
+    })
+</script>
 </body>
 </html>

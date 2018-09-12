@@ -19,6 +19,7 @@ import java.util.List;
  * @date 2018/9/9
  */
 @Controller
+@RequestMapping("order")
 public class OrderController {
     private final OrderService service;
 
@@ -49,9 +50,7 @@ public class OrderController {
     @RequestMapping(value = "orderDetail/{id}", method = RequestMethod.GET)
     public String orderDetail(@PathVariable Integer id, Model model) {
         OrderDetail detail = service.selectOrderDetailById(id);
-        List<Comment> comments = productService.selectCommentById(id, 4);
         model.addAttribute("detail", detail);
-        model.addAttribute("comments", comments);
         return "orderDetail";
     }
 

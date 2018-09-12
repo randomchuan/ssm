@@ -7,13 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import team.edge.bean.Address;
+import team.edge.bean.Info;
 import team.edge.bean.User;
 import team.edge.service.AddressService;
 import team.edge.service.UserService;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -22,6 +20,7 @@ import javax.servlet.http.HttpSession;
  * @// TODO: 2018/9/9 处理与User相关的请求
  */
 @Controller
+@RequestMapping("user")
 public class UserController {
     private final UserService service;
 
@@ -73,10 +72,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/checkRegister", method = RequestMethod.POST)
-    public String checkRegister(@ModelAttribute User user, HttpServletRequest request) {
+    public String checkRegister( @ModelAttribute User user) {
+
+
         boolean b = service.insertUser(user);
         logger.info(user);
-        request.setAttribute("user", user);
         if (b) {
             // 将信息存储
             return "login";
@@ -94,8 +94,8 @@ public class UserController {
     public String info(Model model, HttpSession session) {
         User user = (User) session.getAttribute("USER");
         Integer id = user.getId();
-        Address address = service1.selectAddrById(id);
-        model.addAttribute("address", address);
+        Info info = service1.selectAddrById(id);
+        model.addAttribute("address", info);
         return "info";
     }
 
@@ -111,4 +111,10 @@ public class UserController {
         session.invalidate();
         return "redirect:login";
     }
+
+//    @InitBinder
+//    public void initBinder(WebDataBinder webDataBinder) {
+//        webDataBinder.addValidators(new UserFormValidator());
+//    }
+
 }

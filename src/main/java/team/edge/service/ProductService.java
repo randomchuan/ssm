@@ -3,8 +3,10 @@ package team.edge.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team.edge.bean.Comment;
-import team.edge.bean.Product;
 import team.edge.bean.Detail;
+import team.edge.dto.CommentDetail;
+import team.edge.dto.ProductBrief;
+import team.edge.dto.ProductDetail;
 import team.edge.mapper.CommentMapper;
 import team.edge.mapper.ProductMapper;
 
@@ -35,8 +37,8 @@ public class ProductService {
      *
      * @return
      */
-    public List<Product> selectMostItems() {
-        return mapper.selectMostItems();
+    public List<ProductBrief> selectHotProducts() {
+        return mapper.selectHotProducts(6);
     }
 
     /**
@@ -44,16 +46,17 @@ public class ProductService {
      *
      * @return
      */
-    public List<Product> selectNewItems() {
-        return mapper.selectNewItems();
+    public List<ProductBrief> selectNewProducts() {
+        return mapper.selectNewProducts(4);
     }
 
-    public Detail selectDetailById(Integer id) {
+    public ProductDetail selectDetailById(Integer id) {
         // 在此处解析参数
-        Detail detail = mapper.selectDetailById(id);
-        String params = detail.getParameter();
+//        判空
+        ProductDetail detail = mapper.selectDetailById(id);
+        String params = detail.getDetail().getParameter();
         String[] strings = params.split(",");
-        Map<String, String> paramsMap = new HashMap<>();
+        Map<String, String> paramsMap = new HashMap<>(10);
         String[] strs;
         for (String string : strings) {
             strs = string.split(":");
@@ -63,7 +66,7 @@ public class ProductService {
         return detail;
     }
 
-    public List<Comment> selectCommentById(Integer id, Integer no){
-        return commentMapper.selectCommentById(id,no);
+    public List<CommentDetail> selectCommentById(Integer id, Integer no) {
+        return commentMapper.selectCommentById(id, no);
     }
 }

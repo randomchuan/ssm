@@ -5,8 +5,8 @@
 <mapper namespace="team.edge.mapper.CommentMapper">
     <!--根据ID查询商品的用户评论-->
     <!--要分页-->
-    <select id="selectCommentById" parameterType="java.lang.Integer" resultType="team.edge.bean.Comment">
-        SELECT * FROM tb_comment WHERE tb_comment.product_id = #{product_id} LIMIT #{size};
+    <select id="selectCommentById" parameterType="java.lang.Integer" resultMap="commentDetail">
+        SELECT * FROM view_comment_detail WHERE view_comment_detail.user_id = #{id} ORDER BY view_comment_detail.create_time DESC LIMIT #{size};
     </select>
 
     <!--添加用户评论-->
@@ -14,4 +14,13 @@
         INSERT INTO tb_comment(tb_comment.id,tb_comment.user_id,tb_comment.product_id,tb_comment.`comment`,tb_comment.create_time)
         VALUES(#{id}, #{userId}, #{productId}, #{comment}, #{createTime});
     </insert>
+
+    <!--配置CommentDetail的映射-->
+    <resultMap id="commentDetail" type="team.edge.dto.CommentDetail">
+        <result property="comment.id" column="id"/>
+        <result property="comment.userId" column="user_id"/>
+        <result property="comment.productId" column="product_id"/>
+        <result property="comment.comment" column="comment"/>
+        <result property="comment.createTime" column="create_time"/>
+    </resultMap>
 </mapper>

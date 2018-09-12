@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team.edge.bean.Comment;
 import team.edge.bean.User;
+import team.edge.dto.CommentDetail;
 import team.edge.mapper.CommentMapper;
 
 import javax.servlet.http.HttpSession;
@@ -20,7 +21,7 @@ public class CommentService {
     @Autowired
     private CommentMapper mapper;
 
-    public List<Comment> selectCommentById(Integer id, Integer size) {
+    public List<CommentDetail> selectCommentById(Integer id, Integer size) {
         return mapper.selectCommentById(id, size);
     }
 

@@ -21,7 +21,7 @@
 
     <!--根据订单ID 查询订单详情-->
     <select id="selectOrderDetailById" resultType="team.edge.bean.OrderDetail" parameterType="java.lang.Integer">
-        SELECT tb_address.address,tb_address.phone,tb_order.product_id,tb_order.user_id,tb_order.`status`,tb_order.id,
+        SELECT tb_address.info,tb_address.phone,tb_order.product_id,tb_order.user_id,tb_order.`status`,tb_order.id,
                 tb_order.create_time,tb_user.`name` AS user_name,tb_product.`name` AS product_name,tb_product.new_price,tb_product.`describe`
         FROM
                 tb_address ,tb_order ,tb_user ,tb_product

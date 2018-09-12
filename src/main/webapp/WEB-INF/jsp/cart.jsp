@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page isELIgnored="false" %>
+<%--<%@ page errorPage="error.jsp" %>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -33,20 +34,22 @@
             </ul>
         </c:if>
     </div>
-    <div class="bottom">
-        <div class="total">
-            <%--显示总价--%>
-            <%--高光操作-EL求和--%>
-            <%--list.stream().map(x->x.price*x.count).sum()--%>
-            ￥ ${sessionScope.CART.stream().map(x -> x.price*x.count).sum()}
+    <c:if test="${not empty sessionScope.USER}">
+        <div class="bottom">
+            <div class="total">
+                    <%--显示总价--%>
+                    <%--高光操作-EL求和--%>
+                    <%--list.stream().map(x->x.price*x.count).sum()--%>
+                ￥ ${sessionScope.CART.stream().map(x -> x.price*x.count).sum()}
+            </div>
+            <div class="fun">
+                    <%--显示功能按钮--%>
+                <a href=""><spring:message code="cart.bottom.reset"/></a><a href=""><spring:message
+                    code="cart.bottom.submit"/></a>
+            </div>
+            <div class="clr"></div>
         </div>
-        <div class="fun">
-            <%--显示功能按钮--%>
-            <a href=""><spring:message code="cart.bottom.reset"/></a><a href=""><spring:message
-                code="cart.bottom.submit"/></a>
-        </div>
-        <div class="clr"></div>
-    </div>
+    </c:if>
 </div>
 </body>
 </html>

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page isELIgnored="false" %>
+<%--<%@ page errorPage="error.jsp" %>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -20,24 +21,40 @@
 
 <%--一依次展示属性--%>
 <div class="detail">
-    <%--列表，标题h2标签 内容p标签--%>
+    <%--列表，标题h4标签 内容p标签--%>
     <ui>
-        <li><h2><spring:message code="detail.product.id"/></h2>
-            <p>${detail.productId}</p></li>
-        <li><h2><spring:message code="detail.product.name"/></h2>
-            <p>${detail.productName}</p></li>
-        <li><h2><spring:message code="detail.product.price_old"/></h2>
-            <p>${detail.priceOld}</p></li>
-        <li><h2><spring:message code="detail.product.price_new"/></h2>
-            <p>${detail.priceNew}</p></li>
-        <li><h2><spring:message code="detail.product.sales"/></h2>
-            <p>${detail.sales}</p></li>
-        <li><h2><spring:message code="detail.product.visitor"/></h2>
-            <p>${detail.visitor}</p></li>
-        <li><h2><spring:message code="detail.product.assessment"/></h2>
-            <p>${detail.assessment}</p></li>
-        <li><h2><spring:message code="detail.product.create_time"/></h2>
-            <p>${detail.createTime}</p></li>
+        <li>
+            <div class="col">
+                <h4><spring:message code="detail.product.id"/></h4>
+                <p>${detail.detail.id}</p>
+                <h4><spring:message code="detail.product.name"/></h4>
+                <p>${detail.name}</p>
+            </div>
+        </li>
+        <li>
+            <div class="col">
+                <h4><spring:message code="detail.product.price_old"/></h4>
+                <p>${detail.detail.priceOld}</p>
+                <h4><spring:message code="detail.product.price_new"/></h4>
+                <p>${detail.detail.priceNew}</p>
+            </div>
+        </li>
+        <li>
+            <div class="col">
+                <h4><spring:message code="detail.product.sales"/></h4>
+                <p>${detail.detail.sales}</p>
+                <h4><spring:message code="detail.product.visitor"/></h4>
+                <p>${detail.detail.visitor}</p>
+                <h4><spring:message code="detail.product.assessment"/></h4>
+                <p>${detail.detail.assessment}</p>
+            </div>
+        </li>
+        <li>
+            <div class="col">
+                <h4><spring:message code="detail.product.create_time"/></h4>
+                <p>${detail.detail.createTime}</p>
+            </div>
+        </li>
     </ui>
 </div>
 
@@ -45,17 +62,18 @@
     <ol>
         <%--参数展示 同上--%>
         <c:forEach items="${detail.params}" var="para">
-            <li><h2>${para.key}</h2>: <p>${para.value}</p></li>
+            <li><h4>${para.key}</h4>: <p>${para.value}</p></li>
         </c:forEach>
     </ol>
 </div>
 
 <hr>
 <%--使用iframe包含评论页面--%>
-<iframe src="${pageContext.request.contextPath}/commentList/${detail.productId}" frameborder="0" width="100%" scrolling="no"></iframe>
+<iframe src="${pageContext.request.contextPath}/comment/list/${detail.detail.productId}" frameborder="0" width="100%"
+        scrolling="no"></iframe>
 
 <%--这里再显示一个热销产品--%>
-<jsp:include page="/mostProducts"/>
+<jsp:include page="/product/hot"/>
 
 <%--引入公共尾--%>
 <iframe src="../../foot.html" width="100%" scrolling="no"></iframe>

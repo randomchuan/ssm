@@ -1,12 +1,14 @@
 package team.edge.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author jack
  * @date 2018/9/9
  */
-public class OrderDetail {
+public class OrderDetail implements Serializable {
+    private Long serialVersionUID = 1L;
     private Integer id;
     private Integer userId;
     private Integer productId;

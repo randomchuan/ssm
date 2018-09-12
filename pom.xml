@@ -223,6 +223,34 @@
             <version>5.1.6</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+        <!--<dependency>-->
+            <!--<groupId>javax.validation</groupId>-->
+            <!--<artifactId>validation-api</artifactId>-->
+            <!--<version>2.0.1.Final</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.bval</groupId>-->
+            <!--<artifactId>bval-jsr303</artifactId>-->
+            <!--<version>0.5</version>-->
+        <!--</dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/com.google.code.kaptcha/kaptcha -->
+        <!--<dependency>-->
+        <!--<groupId>com.google.code.kaptcha</groupId>-->
+        <!--<artifactId>kaptcha</artifactId>-->
+        <!--<version>2.3</version>-->
+        <!--</dependency>-->
+
+        <!--lombok插件-->
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.2</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <!--主要用于编译设置，包括两个主要的元素，build和report-->

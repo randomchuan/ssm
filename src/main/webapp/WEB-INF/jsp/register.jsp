@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page isELIgnored="false" %>
+<%--<%@ page errorPage="error.jsp" %>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -29,10 +30,12 @@
             <p class="item">
                 <label for="name"><spring:message code="register.register.name"/></label>
                 <form:input path="name" name="name"/>
+                    <%--错误信息及错误样式--%>
+                <form:errors path="name" cssClass="error"/>
             </p>
             <p class="item">
                 <label for="password"><spring:message code="register.register.password"/></label>
-                <form:input path="password" name="password"/>
+                <form:password path="password" name="password" id="password"/>
             </p>
             <p id="button">
                 <a href="${pageContext.request.contextPath}/login"><spring:message code="register.register.login"/></a>
@@ -40,8 +43,8 @@
             </p>
         </fieldset>
     </form:form>
+    <button value="button"></button>
 </div>
-
 
 </body>
 </html>

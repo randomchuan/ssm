@@ -1,0 +1,32 @@
+/*主页的样式表*/
+
+/*为每个部分增加下边框*/
+.head, .mid, .new, .hot, .lb {
+    border-bottom: #92B8B1 solid 1px;
+}
+
+/*设置img的宽度*/
+.lb{
+    text-align: center;
+    height: 450px;
+}
+.lb img {
+    width: 100%;
+}
+
+img{
+    width: auto;
+}
+
+/*为foot添加一个分明的上边框，同事取消下边框*/
+.foot {
+    border-top: #8D8D8D solid 2px;
+}
+
+/*为product添加样式*/
+.product {
+    border: #C9C5C5 solid 1px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+}

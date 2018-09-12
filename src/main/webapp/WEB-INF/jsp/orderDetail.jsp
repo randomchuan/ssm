@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page isELIgnored="false" %>
+<%--<%@ page errorPage="error.jsp" %>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -63,8 +64,8 @@
                 <td>${detail.phone}</td>
             </tr>
             <tr>
-                <td><spring:message code="order.detail.address"/></td>
-                <td>${detail.address}</td>
+                <td><spring:message code="order.detail.info"/></td>
+                <td>${detail.info}</td>
             </tr>
         </table>
         <a href="#"><spring:message code="order.detail.problem"/> </a><a href="#"><spring:message

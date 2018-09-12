@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import team.edge.bean.Comment;
-import team.edge.bean.Product;
-import team.edge.bean.Detail;
+import team.edge.dto.CommentDetail;
+import team.edge.dto.ProductBrief;
+import team.edge.dto.ProductDetail;
 import team.edge.service.ProductService;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.List;
  * @// TODO: 2018/9/7 这里主要处理与商品有关的请求
  */
 @Controller
+@RequestMapping("/product")
 public class ProductController {
     private Logger logger = Logger.getLogger(this.getClass());
     private final ProductService service;
@@ -35,12 +37,11 @@ public class ProductController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/mostProducts", method = RequestMethod.GET)
+    @RequestMapping(value = "/hot", method = RequestMethod.GET)
     public String mostProducts(Model model) {
-        logger.info("最热销商品展示！！！");
-        List<Product> mostProducts = service.selectMostItems();
-        model.addAttribute("mostProducts", mostProducts);
-        return "mostProducts";
+        List<ProductBrief> mostProducts = service.selectHotProducts();
+        model.addAttribute("hots", mostProducts);
+        return "hot";
     }
 
     /**
@@ -49,12 +50,12 @@ public class ProductController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/newProducts", method = RequestMethod.GET)
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newProducts(Model model) {
         logger.info("最新商品展示");
-        List<Product> newProducts = service.selectNewItems();
-        model.addAttribute("newProducts", newProducts);
-        return "newProducts";
+        List<ProductBrief> newProducts = service.selectNewProducts();
+        model.addAttribute("news", newProducts);
+        return "new";
     }
 
     /**
@@ -63,14 +64,11 @@ public class ProductController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/productDetail/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
     public String productDetail(@PathVariable Integer id, Model model) {
         // 获取详细信息
-        Detail detail = service.selectDetailById(id);
+        ProductDetail detail = service.selectDetailById(id);
         model.addAttribute("detail", detail);
-        // 获取评论
-        List<Comment> comments = service.selectCommentById(id,10);
-        model.addAttribute("comments", comments);
         return "detail";
     }
 }

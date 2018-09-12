@@ -3,19 +3,49 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.edge.mapper.ProductMapper">
-    <!-- 查询最新上架的6种商品-->
-    <select id="selectNewItems" resultType="team.edge.bean.Product">
-        SELECT * FROM tb_product ORDER BY tb_product.create_time LIMIT 4;
+    <!-- 查询最新上架的4种商品-->
+    <select id="selectNewProducts" parameterType="java.lang.Integer" resultMap="productBrief">
+        SELECT * FROM view_product_brief ORDER BY view_product_brief.create_time DESC LIMIT #{size};
     </select>
 
-    <!-- 查询最新上架的6种商品-->
-    <select id="selectMostItems" resultType="team.edge.bean.Product">
-        SELECT * FROM tb_product ORDER BY tb_product.create_time LIMIT 6;
+    <!-- 查询最热销的6种商品-->
+    <select id="selectHotProducts" parameterType="java.lang.Integer" resultMap="productBrief">
+        SELECT * FROM view_product_brief ORDER BY view_product_brief.sales DESC LIMIT #{size};
     </select>
 
     <!--根据ID查询详细信息-->
-    <select id="selectDetailById" parameterType="java.lang.Integer" resultType="team.edge.bean.Detail">
-        SELECT tb_detail.*, tb_product.name AS product_name FROM tb_detail, tb_product WHERE tb_detail.product_id = tb_product.id AND tb_detail.product_id = #{product_id};
+    <select id="selectDetailById" parameterType="java.lang.Integer" resultMap="productDetail">
+        SELECT * FROM view_product_detail WHERE view_product_detail.product_id = #{product_id};
     </select>
 
+
+    <!--配置商品详情的映射-->
+    <resultMap id="productDetail" type="team.edge.dto.ProductDetail">
+        <result property="detail.id" column="id"/>
+        <result property="detail.productId" column="product_id"/>
+        <result property="detail.priceOld" column="price_old"/>
+        <result property="detail.priceNew" column="price_new"/>
+        <result property="detail.parameter" column="parameter"/>
+        <result property="detail.sales" column="sales"/>
+        <result property="detail.visitor" column="visitor"/>
+        <result property="detail.assessment" column="assessment"/>
+        <result property="detail.createTime" column="create_time"/>
+        <result property="detail.star" column="star"/>
+        <result property="detail.description" column="description"/>
+        <result property="name" column="name"/>
+        <result property="sortName" column="sort_name"/>
+    </resultMap>
+
+    <!--配置商品简介的映射-->
+    <resultMap id="productBrief" type="team.edge.dto.ProductBrief">
+        <result property="product.id" column="id"/>
+        <result property="product.name" column="name"/>
+        <result property="product.createTime" column="create_time"/>
+
+        <!--这里不需要依次映射-->
+        <!--<result property="priceOld" column="price_old"/>-->
+        <!--<result property="priceNew" column="price_new"/>-->
+        <!--<result property="star" column="star"/>-->
+        <!--<result property="sales" column="sales"/>-->
+    </resultMap>
 </mapper>

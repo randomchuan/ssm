@@ -1,0 +1,30 @@
+/*这里定义一些基本样式*/
+
+/*设定屏幕大小*/
+body {
+    /*width: 1600px;*/
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/*取消链接下划线*/
+a {
+    text-decoration: none;
+}
+
+/*取消列表的图标*/
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/*设置字体样式*/
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+/*清除浮动*/
+.clr{
+    float: none;
+}

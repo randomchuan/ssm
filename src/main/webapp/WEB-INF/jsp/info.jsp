@@ -1,4 +1,3 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: jack
@@ -6,7 +5,10 @@
   Time: 19:41
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page isELIgnored="false" %>
+<%--<%@ page errorPage="error.jsp" %>--%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
     <title></title>
@@ -20,8 +22,8 @@
             <li><h2><spring:message code="user.info.name"/></h2> <p>${sessionScope.USER.name}</p></li>
             <li><h2><spring:message code="user.info.password"/></h2> <p>${sessionScope.USER.password}</p></li>
             <li><h2><spring:message code="user.info.time"/></h2> <p>${sessionScope.USER.createTime}</p></li>
-            <li><h2><spring:message code="user.info.address"/></h2> <p>${address.address}</p></li>
-            <li><h2><spring:message code="user.info.phone"/></h2> <p>${address.phone}</p></li>
+            <li><h2><spring:message code="user.info.info"/></h2> <p>${info.info}</p></li>
+            <li><h2><spring:message code="user.info.phone"/></h2> <p>${info.phone}</p></li>
             <li><h2><spring:message code="user.info.other"/></h2> <p>一些浏览器信息</p></li>
         </ul>
     </div>

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import team.edge.bean.Comment;
 import team.edge.bean.Product;
 import team.edge.bean.Detail;
+import team.edge.dto.ProductBrief;
+import team.edge.dto.ProductDetail;
 
 import java.util.List;
 
@@ -20,13 +22,18 @@ public interface ProductMapper {
      * 获取最新上架的4种商品
      * @return
      */
-    public List<Product> selectNewItems();
+    public List<ProductBrief> selectNewProducts(Integer size);
 
     /**
      * 获取最畅销的6种商品
      * @return
      */
-    public List<Product> selectMostItems();
+    public List<ProductBrief> selectHotProducts(Integer size);
 
-    public Detail selectDetailById(Integer id);
+    /**
+     * 根据ID显示详情
+     * @param id
+     * @return
+     */
+    public ProductDetail selectDetailById(@Param("product_id") Integer id);
 }

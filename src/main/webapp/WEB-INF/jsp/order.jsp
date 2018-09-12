@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page isELIgnored="false" %>
+<%--<%@ page errorPage="error.jsp" %>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -21,9 +22,9 @@
             <p><spring:message code="user.order.tip"/></p>
             <div class="function">
                 <ul>
-                    <li><a href="${pageContext.request.contextPath}/index.jsp"><spring:message
+                    <li><a href="${pageContext.request.contextPath}/WEB-INF/index.jsp"><spring:message
                             code="user.order.home"/></a></li>
-                    <%--分类详情--%>
+                        <%--分类详情--%>
                     <li><a href="#"><spring:message code="user.order.sort"/></a></li>
                     <li><a href="${pageContext.request.contextPath}/user"><spring:message code="user.order.user"/></a>
                     </li>
@@ -61,12 +62,14 @@
                 </c:forEach>
                 </tbody>
             </table>
+                <%--分页可以完善--%>
             <tfoot>
-            <%--分页可以完善--%>
             <tr>
-                <td><a href="${pageContext.request.contextPath}/userOrder/${pageNo-1}"><spring:message code="user.order.pre"/></a></td>
+                <td><a href="${pageContext.request.contextPath}/userOrder/${pageNo-1}"><spring:message
+                        code="user.order.pre"/></a></td>
                 <td>${pageNo}</td>
-                <td><a href="${pageContext.request.contextPath}/userOrder/${pageNo+1}"><spring:message code="user.order.next"/></a></td>
+                <td><a href="${pageContext.request.contextPath}/userOrder/${pageNo+1}"><spring:message
+                        code="user.order.next"/></a></td>
             </tr>
             </tfoot>
         </div>
